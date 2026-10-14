@@ -1,1 +1,123 @@
-hi
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML-to-JS Converter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"><span class="m-html">HTML</span><span class="m-arrow">&rarr;</span><span class="m-js">JS</span></span>
+      <h1>HTML-to-JS Converter</h1>
+    </div>
+    <p class="lede">Upload a ZIP of a static website. Every page becomes a JavaScript file, and only <code>index.html</code> and <code>render.html</code> stay as HTML. It all runs in your browser, so your files are never uploaded anywhere.</p>
+    <ol class="stages" id="stages" aria-label="Progress"></ol>
+    <aside class="notice"><strong>This restructures delivery. It does not protect your code.</strong> Visitors can still read every page in their browser's developer tools. View-source will show an empty shell, so search engines and visitors without JavaScript may not see your content.</aside>
+  </header>
+
+  <main>
+    <!-- 1. Upload -->
+    <section class="panel" id="panel-upload" aria-labelledby="h-upload">
+      <div class="panel-head"><h2 id="h-upload">Upload your website</h2><span class="sub">ZIP file, any size your browser can hold in memory</span></div>
+      <label class="drop" id="drop" for="zip-input">
+        <input type="file" id="zip-input" accept=".zip,application/zip,application/x-zip-compressed">
+        <strong>Drop your website ZIP here</strong>
+        <span>or click to choose a file</span>
+      </label>
+      <div class="upload-actions">
+        <button class="btn secondary" type="button" id="btn-sample">Try the sample site</button>
+        <span class="status" id="upload-status" role="status" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <!-- 2. Analyse -->
+    <section class="panel" id="panel-analyse" aria-labelledby="h-analyse" hidden>
+      <div class="panel-head">
+        <h2 id="h-analyse">What we found</h2>
+        <span class="sub"><span id="analyse-name" class="mono"></span> &middot; <button class="linkbtn" type="button" id="btn-reset">Choose a different file</button></span>
+      </div>
+      <ul class="summary" id="summary"></ul>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col"><span class="sr" style="position:absolute;left:-9999px">Convert</span><input class="check" type="checkbox" id="check-all" aria-label="Convert all pages" checked></th><th scope="col">Page</th><th scope="col">Title</th><th scope="col" class="num">Links</th><th scope="col" class="num">Scripts</th><th scope="col" class="num">Size</th></tr></thead>
+          <tbody id="page-rows"></tbody>
+        </table>
+      </div>
+      <div class="notes" id="analyse-notes"></div>
+      <div class="options">
+        <label class="field">Folder for page scripts<input type="text" id="opt-dir" value="pages" spellcheck="false" autocomplete="off"></label>
+        <label class="inline-check"><input class="check" type="checkbox" id="opt-literals" checked> Update page links written as text inside scripts</label>
+      </div>
+      <div class="convert-row">
+        <button class="btn" type="button" id="btn-convert">Convert pages</button>
+        <span class="sub" id="convert-hint">Unticked pages stay as .html files, which suits fragments that your scripts load with fetch().</span>
+      </div>
+    </section>
+
+    <!-- 3. Result -->
+    <section class="panel" id="panel-result" aria-labelledby="h-result" hidden>
+      <div class="banner" id="banner">
+        <div><h2 id="h-result"></h2><p id="banner-stats"></p></div>
+        <div class="actions">
+          <button class="btn" type="button" id="btn-download">Download converted ZIP</button>
+          <button class="btn secondary" type="button" id="btn-report">Download report</button>
+        </div>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Result">
+        <button role="tab" id="tab-report" aria-controls="view-report" aria-selected="true" type="button">Validation</button>
+        <button role="tab" id="tab-preview" aria-controls="view-preview" aria-selected="false" type="button" tabindex="-1">Preview</button>
+        <button role="tab" id="tab-files" aria-controls="view-files" aria-selected="false" type="button" tabindex="-1">Files</button>
+      </div>
+
+      <div id="view-report" role="tabpanel" aria-labelledby="tab-report">
+        <div class="chips" id="chips"></div>
+        <div id="findings"></div>
+        <p class="fine" id="runtime-note"></p>
+      </div>
+
+      <div id="view-preview" role="tabpanel" aria-labelledby="tab-preview" hidden>
+        <div class="preview-bar">
+          <label class="sub" for="preview-page">Page</label>
+          <select id="preview-page"></select>
+          <span class="seg" role="group" aria-label="Preview width">
+            <button type="button" data-device="desktop" aria-pressed="true">Desktop</button>
+            <button type="button" data-device="tablet" aria-pressed="false">Tablet</button>
+            <button type="button" data-device="phone" aria-pressed="false">Phone</button>
+          </span>
+          <button class="btn secondary small" type="button" id="btn-reload">Reload</button>
+        </div>
+        <div class="stage" id="stage" data-device="desktop">
+          <iframe id="preview-frame" title="Preview of the converted page" sandbox="allow-scripts allow-popups allow-forms"></iframe>
+        </div>
+        <div class="console" id="console" aria-live="polite"></div>
+        <p class="fine">The preview runs the real renderer and your scripts in an isolated frame, with images and stylesheets embedded. It cannot reach files that scripts request while running (fetch, XHR) and blocks storage, so a few features may behave differently than on a server. Test the downloaded ZIP on a local web server for a final check.</p>
+      </div>
+
+      <div id="view-files" role="tabpanel" aria-labelledby="tab-files" hidden>
+        <h3 class="section">Converted pages</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th scope="col">Original file</th><th scope="col">Page script</th><th scope="col">Address</th></tr></thead>
+          <tbody id="map-rows"></tbody>
+        </table></div>
+        <h3 class="section">Output structure</h3>
+        <pre class="tree" id="tree"></pre>
+        <p class="fine" id="tree-note"></p>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="jszip.min.js"></script>
+<script src="converter-core.js"></script>
+<script src="sample-site.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
