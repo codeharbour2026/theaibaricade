@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Level 1 Generator — AI Barricade</title>
+  <meta name="description" content="Generate a robots.txt that blocks selected AI crawlers and merges safely with your existing file. Runs entirely in your browser.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="AI Barricade home">
+      <svg viewBox="0 0 64 72" aria-hidden="true"><defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#2563eb"/></linearGradient></defs><path d="M32 3 6 13v20c0 17 11 29 26 36 15-7 26-19 26-36V13L32 3z" fill="url(#sg)"/><path d="M32 12 15 19v14c0 11 7 20 17 25 10-5 17-14 17-25V19l-17-7z" fill="#07112b"/><path d="M24 35l6 6 11-13" fill="none" stroke="#22d3ee" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      AI Barricade
+    </a>
+    <nav aria-label="Main"><ul>
+      <li><a class="link" href="index.html">Home</a></li>
+      <li><a class="link" href="pricing.html">Pricing</a></li>
+      <li><a class="link" href="generator.html" aria-current="page">Generator</a></li>
+      <li><a class="link" href="index.html#faq">FAQ</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div style="padding-top:40px">
+    <span class="eyebrow">Level 1 · Basic Rules</span>
+    <h1>robots.txt generator</h1>
+    <p class="muted" style="max-width:68ch">Choose which AI crawlers to block, optionally paste your current <code>robots.txt</code>, and get a merged file. Everything runs in your browser; nothing is uploaded.</p>
+    <div class="callout warn"><strong>Advisory only.</strong> robots.txt is a request, not access control. Compliant crawlers may respect it; malicious or non-compliant crawlers can ignore it. This tool generates a file. It does not enforce anything until the file is live on your site.</div>
+  </div>
+
+  <div class="layout">
+    <form id="form" class="sticky" novalidate autocomplete="off">
+      <fieldset>
+        <legend>1. Your website</legend>
+        <label for="domain">Domain</label>
+        <input type="text" id="domain" inputmode="url" placeholder="example.com" maxlength="300" aria-describedby="domain-err">
+        <div class="field-error" id="domain-err" role="alert"></div>
+        <label class="check"><input type="checkbox" id="auth"> <span class="name">I own this website or am authorised to manage its robots.txt.</span></label>
+        <div class="field-error" id="auth-err" role="alert"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>2. Existing robots.txt <span class="muted" style="font-weight:400">(optional)</span></legend>
+        <label for="existing">Paste your current file</label>
+        <textarea id="existing" spellcheck="false" placeholder="# Paste your current robots.txt here. Existing rules are kept; we only add lines."></textarea>
+        <div class="hint">Or load it from a file: <input type="file" id="file" accept=".txt,text/plain" style="max-width:100%"></div>
+        <div class="field-error" id="existing-err" role="alert"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. Crawlers to block</legend>
+        <div class="hint">Presets: <button type="button" class="btn btn-ghost" style="padding:3px 10px;font-size:.8rem" data-preset="training">Training only</button> <button type="button" class="btn btn-ghost" style="padding:3px 10px;font-size:.8rem" data-preset="all">Everything</button> <button type="button" class="btn btn-ghost" style="padding:3px 10px;font-size:.8rem" data-preset="none">Clear</button></div>
+        <div id="crawler-list"></div>
+        <div class="field-error" id="crawler-err" role="alert"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>4. What to protect</legend>
+        <div class="radio-row" role="radiogroup" aria-label="Scope">
+          <label><input type="radio" name="mode" value="full" checked> Whole site</label>
+          <label><input type="radio" name="mode" value="paths"> Selected paths only</label>
+        </div>
+        <div id="paths-box" hidden>
+          <label for="paths">Paths to block (one per line)</label>
+          <textarea id="paths" spellcheck="false" placeholder="/private/&#10;/members/&#10;/blog/drafts/"></textarea>
+          <div class="hint">Each path must start with <code>/</code>. Wildcards <code>*</code> and <code>$</code> are allowed.</div>
+        </div>
+        <div class="field-error" id="paths-err" role="alert"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>5. Sitemap <span class="muted" style="font-weight:400">(optional)</span></legend>
+        <label for="sitemap">Sitemap URL</label>
+        <input type="url" id="sitemap" placeholder="https://example.com/sitemap.xml" maxlength="500">
+        <div class="hint">Added only if not already declared. Must be on your domain.</div>
+        <div class="field-error" id="sitemap-err" role="alert"></div>
+      </fieldset>
+
+      <button type="submit" class="btn btn-primary" style="width:100%">Generate robots.txt</button>
+    </form>
+
+    <div>
+      <div id="empty" class="empty-state">Your preview will appear here after you click <strong>Generate</strong>.</div>
+
+      <div id="result" hidden>
+        <div class="preview-head">
+          <h2 style="margin:0;font-size:1.3rem">Preview <span class="muted" style="font-size:.9rem;font-weight:400">· new lines highlighted</span></h2>
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="download">Download robots.txt</button>
+            <button type="button" class="btn btn-ghost" id="copy">Copy</button>
+          </div>
+        </div>
+        <pre class="code" id="preview" tabindex="0" aria-label="Generated robots.txt preview"></pre>
+        <div id="summary"></div>
+
+        <h2 style="margin-top:36px;font-size:1.3rem">Install it</h2>
+        <ol class="steps">
+          <li><strong>Save the file as <code>robots.txt</code></strong> (lowercase, plain text, UTF-8). Keep a backup of your current file first.</li>
+          <li><strong>Upload it to the root of your domain</strong> so it loads at <code id="url-example">https://example.com/robots.txt</code>. It must be at the root; a file in a subfolder is ignored.</li>
+          <li><strong>Check it is live:</strong> open that URL in your browser and confirm you see the new rules. Crawlers may cache the old file for up to a day.</li>
+          <li><strong>Validate:</strong> use a robots.txt tester such as the one in Google Search Console to confirm Googlebot is not accidentally blocked.</li>
+        </ol>
+        <div class="callout"><strong>GitHub Pages:</strong> put <code>robots.txt</code> in the root of the branch or folder that Pages publishes (often the repo root or <code>/docs</code>), commit and push. This only works if the site is served from the domain root: a custom domain, or a <code>username.github.io</code> site. A project site at <code>username.github.io/repo/</code> cannot serve <code>/robots.txt</code>, so crawlers will never see it.</div>
+        <div class="callout warn"><strong>What this does and does not do.</strong> Well-behaved crawlers listed here may honour these rules. Crawlers that ignore robots.txt are unaffected. Blocking tokens like <code>Google-Extended</code> opts out of AI training but does not remove you from Google Search. Blocking AI <em>search</em> crawlers can remove you from those AI products.</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap cols">
+    <div><strong style="color:#fff">AI Barricade</strong><br>Level 1 runs entirely in your browser. No payment is taken on this site yet.</div>
+    <div><a href="index.html">Home</a><br><a href="pricing.html">Pricing</a><br><a href="index.html#disclaimer">Disclaimer</a></div>
+  </div>
+</footer>
+
+<script src="crawlers.js"></script>
+<script src="robots.js"></script>
+<script src="generator.js"></script>
+</body>
+</html>

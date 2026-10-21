@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Barricade — Protection against AI crawlers and scraping</title>
+  <meta name="description" content="Five levels of protection against AI crawlers, from robots.txt rules to CDN-level enforcement. Honest about what each level can and cannot do.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="AI Barricade home">
+      <svg viewBox="0 0 64 72" aria-hidden="true"><defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#2563eb"/></linearGradient></defs><path d="M32 3 6 13v20c0 17 11 29 26 36 15-7 26-19 26-36V13L32 3z" fill="url(#sg)"/><path d="M32 12 15 19v14c0 11 7 20 17 25 10-5 17-14 17-25V19l-17-7z" fill="#07112b"/><path d="M24 35l6 6 11-13" fill="none" stroke="#22d3ee" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      AI Barricade
+    </a>
+    <nav aria-label="Main"><ul>
+      <li><a class="link" href="index.html" aria-current="page">Home</a></li>
+      <li><a class="link" href="pricing.html">Pricing</a></li>
+      <li><a class="link" href="generator.html">Generator</a></li>
+      <li><a class="link" href="index.html#faq">FAQ</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">AI crawler protection</span>
+        <h1>Take control of how AI systems use your website.</h1>
+        <p class="lead">Five levels of protection, from a customised <code>robots.txt</code> to CDN-level enforcement. Each level uses a different technique, and we tell you plainly what each one can and cannot stop.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="generator.html">Open the Level 1 generator</a>
+          <a class="btn btn-ghost" href="pricing.html">Compare the five levels</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 64 72"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient></defs><path d="M32 3 6 13v20c0 17 11 29 26 36 15-7 26-19 26-36V13L32 3z" fill="url(#hg)"/><path d="M32 10 13 18v15c0 12 8 21 19 27 11-6 19-15 19-27V18l-19-8z" fill="#0b1a3d"/><path d="M22 35l7 7 13-15" fill="none" stroke="#22d3ee" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Advisory rules and real enforcement are different things</h2>
+        <p class="muted">Most "AI blocking" products blur this line. We don't. Every level is labelled by how it actually works.</p>
+      </div>
+      <div class="grid cols-3">
+        <div class="card"><h3>Asks politely</h3><p class="muted"><strong>Levels 1–2.</strong> <code>robots.txt</code> and policy files tell well-behaved crawlers what you want. Major AI companies publish crawler names and say they honour these rules, but nothing forces a crawler to comply.</p></div>
+        <div class="card"><h3>Adds friction</h3><p class="muted"><strong>Level 3.</strong> A JavaScript script deters casual copying in a browser. It runs on the visitor's side, so it cannot stop a bot that requests your pages directly.</p></div>
+        <div class="card"><h3>Actually blocks</h3><p class="muted"><strong>Levels 4–5.</strong> Enforcement happens at your server or CDN, before content is sent. This is the only layer that can refuse a request, and it needs a platform that supports it.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>How it works</h2></div>
+      <ol class="steps">
+        <li><strong>Choose a level.</strong> Start with the free-to-try Level 1 generator or compare all five on the pricing page.</li>
+        <li><strong>Paste your existing rules.</strong> We merge new rules into your current <code>robots.txt</code> and never delete what you already have.</li>
+        <li><strong>Preview, then download.</strong> You see exactly which lines are new before anything is saved. Files are generated in your browser and never uploaded.</li>
+        <li><strong>Install and verify.</strong> Step-by-step instructions for placing the file at your site root and checking it is live.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What works today</h2>
+        <p class="muted">This is an early version. Here is the honest status of each level.</p>
+      </div>
+      <div class="grid cols-2">
+        <div class="card"><span class="badge live">Working now</span><h3 style="margin-top:10px">Level 1 — Basic Rules</h3><p class="muted">Complete robots.txt generator with merge, path rules, preview, download and install guide.</p><a class="btn btn-primary" href="generator.html">Try it</a></div>
+        <div class="card"><span class="badge next">Next to build</span><h3 style="margin-top:10px">Levels 2–3</h3><p class="muted">Policy documents and a configurable JavaScript deterrent. Fully client-side, so they can be built without extra infrastructure.</p></div>
+        <div class="card"><span class="badge infra">Needs external setup</span><h3 style="margin-top:10px">Levels 4–5</h3><p class="muted">Real enforcement needs a CDN or server you control (for example Cloudflare), plus a backend for dashboards and alerts. Not available on static hosting alone.</p></div>
+        <div class="card"><span class="badge infra">Not connected</span><h3 style="margin-top:10px">Payments</h3><p class="muted">No checkout is wired up yet, so no purchase or subscription can be made on this site. Prices shown are planned prices.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head"><h2>Frequently asked questions</h2></div>
+      <details><summary>Will this stop AI companies using my content?</summary><p>Not with certainty. Compliant crawlers from major AI companies state that they follow robots.txt, so Levels 1–2 can reduce collection by those crawlers. Anything that ignores the rules can only be stopped by server- or CDN-level enforcement (Levels 4–5), and even then determined scrapers can sometimes evade detection. No product can promise 100% protection.</p></details>
+      <details><summary>Is robots.txt a security feature?</summary><p>No. It is a public request, not access control. Anyone can read it, and a malicious bot can ignore it. It is best treated as a clear, machine-readable statement of your preferences.</p></details>
+      <details><summary>Will blocking these crawlers remove me from Google Search?</summary><p>Not by default. <code>Google-Extended</code> and <code>Applebot-Extended</code> are control tokens for AI training and do not affect normal search indexing. Some AI search crawlers (such as OAI-SearchBot or PerplexityBot) are listed separately in the generator because blocking them can remove you from those AI search products.</p></details>
+      <details><summary>Does JavaScript protection stop scrapers?</summary><p>No. A script only runs in a real browser. A bot that downloads your HTML or calls your API directly never executes it. Level 3 deters casual copying and is not a substitute for server-side protection.</p></details>
+      <details><summary>Can this work on GitHub Pages?</summary><p>Levels 1–3 can: they produce static files and scripts. Levels 4–5 cannot run on GitHub Pages alone because it serves static files and cannot run request-filtering logic. You would put a CDN such as Cloudflare in front of your domain (a custom domain is required), and we list the exact account and permissions needed.</p></details>
+      <details><summary>Do I need to be the site owner?</summary><p>Yes. The generator asks you to confirm you own the domain or are authorised to manage it. Never share passwords or API keys with us; none of the current tools ask for them.</p></details>
+      <details><summary>Does my robots.txt get uploaded anywhere?</summary><p>No. The generator runs entirely in your browser. Your pasted file and settings never leave your device.</p></details>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="callout warn" id="disclaimer"><strong>Limitations of crawler blocking.</strong> robots.txt and similar files are advisory. JavaScript runs on the visitor's device and cannot control what is requested directly from your server. Server-side blocking depends on identifying crawlers by signals such as user-agent strings, IP ranges and behaviour, all of which can be forged or change over time. AI Barricade reduces unwanted collection; it does not guarantee that content cannot be copied. Crawler names are maintained from public documentation and may be out of date.</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap cols">
+    <div><strong style="color:#fff">AI Barricade</strong><br>Protection against AI crawlers and automated scraping. Early version: only Level 1 is functional; payments are not connected.</div>
+    <div><a href="pricing.html">Pricing</a><br><a href="generator.html">Generator</a><br><a href="#disclaimer">Disclaimer</a></div>
+  </div>
+</footer>
+</body>
+</html>

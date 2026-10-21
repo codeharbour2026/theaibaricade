@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing — AI Barricade</title>
+  <meta name="description" content="Five protection levels with different technical approaches, honestly labelled by what works today.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="AI Barricade home">
+      <svg viewBox="0 0 64 72" aria-hidden="true"><defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#2563eb"/></linearGradient></defs><path d="M32 3 6 13v20c0 17 11 29 26 36 15-7 26-19 26-36V13L32 3z" fill="url(#sg)"/><path d="M32 12 15 19v14c0 11 7 20 17 25 10-5 17-14 17-25V19l-17-7z" fill="#07112b"/><path d="M24 35l6 6 11-13" fill="none" stroke="#22d3ee" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      AI Barricade
+    </a>
+    <nav aria-label="Main"><ul>
+      <li><a class="link" href="index.html">Home</a></li>
+      <li><a class="link" href="pricing.html" aria-current="page">Pricing</a></li>
+      <li><a class="link" href="generator.html">Generator</a></li>
+      <li><a class="link" href="index.html#faq">FAQ</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap" style="padding-top:48px">
+    <span class="eyebrow">Pricing</span>
+    <h1>Five levels. Five different techniques.</h1>
+    <p class="muted" style="max-width:64ch">Prices are in Australian dollars and are the planned prices. <strong>Checkout is not connected yet</strong>, so nothing can be purchased on this site today. Only Level 1 is functional.</p>
+  </div>
+
+  <section>
+    <div class="wrap plans">
+      <article class="card plan featured">
+        <span class="level">Level 1</span><h3>Basic Rules</h3>
+        <div class="price">A$9 <small>one-time</small></div><div class="sub">Customised robots.txt</div>
+        <span class="badge live">Working now</span>
+        <ul><li>Pick known AI crawlers to block</li><li>Whole site or chosen paths</li><li>Merges with your existing file</li><li>Preview and download</li><li>Install guide</li></ul>
+        <a class="btn btn-primary" href="generator.html">Open generator</a>
+      </article>
+      <article class="card plan">
+        <span class="level">Level 2</span><h3>Advanced Policies</h3>
+        <div class="price">A$29 <small>one-time</small></div><div class="sub">Level 1 + AI-use policies</div>
+        <span class="badge next">Next to build</span>
+        <ul><li>Everything in Level 1</li><li>AI training / scraping / reuse policy options</li><li>Policy documents and supported config files</li><li>Advisory vs enforced explained</li><li>Downloadable install guide</li></ul>
+        <button class="btn btn-ghost" disabled>Not available yet</button>
+      </article>
+      <article class="card plan">
+        <span class="level">Level 3</span><h3>JavaScript Shield</h3>
+        <div class="price">A$59 <small>setup</small></div><div class="sub">+ A$5/month</div>
+        <span class="badge next">Next to build</span>
+        <ul><li>Configurable copy-paste script</li><li>Choose which page elements it covers</li><li>Client-side deterrents only</li><li>Test instructions</li></ul>
+        <button class="btn btn-ghost" disabled>Not available yet</button>
+      </article>
+      <article class="card plan">
+        <span class="level">Level 4</span><h3>Server Guard</h3>
+        <div class="price">A$149 <small>setup</small></div><div class="sub">+ A$19/month</div>
+        <span class="badge infra">Needs external setup</span>
+        <ul><li>CDN / server request filtering</li><li>Rate limiting, allow and block lists</li><li>Safe defaults against false positives</li><li>Logs and a rule tester</li></ul>
+        <button class="btn btn-ghost" disabled>Not available yet</button>
+      </article>
+      <article class="card plan">
+        <span class="level">Level 5</span><h3>AI Fortress</h3>
+        <div class="price">A$399 <small>setup</small></div><div class="sub">+ A$49/month</div>
+        <span class="badge infra">Needs external setup</span>
+        <ul><li>Policy + enforcement combined</li><li>Behavioural detection where supported</li><li>Dashboard, reports and alerts</li><li>Multiple protected sites</li></ul>
+        <button class="btn btn-ghost" disabled>Not available yet</button>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>Feature comparison</h2><p class="muted">"Enforced" means the request is refused before content is sent. Anything else is advisory or a deterrent.</p></div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Feature</th><th class="c">L1 Basic</th><th class="c">L2 Policies</th><th class="c">L3 JS Shield</th><th class="c">L4 Server Guard</th><th class="c">L5 Fortress</th></tr></thead>
+          <tbody>
+            <tr><td>Technique</td><td class="c">robots.txt</td><td class="c">robots.txt + policy files</td><td class="c">Client-side script</td><td class="c">CDN / server rules</td><td class="c">All layers</td></tr>
+            <tr><td>Strength</td><td class="c part">Advisory</td><td class="c part">Advisory</td><td class="c part">Deterrent</td><td class="c yes">Enforced</td><td class="c yes">Enforced</td></tr>
+            <tr><td>Stops crawlers that ignore the rules</td><td class="c no">No</td><td class="c no">No</td><td class="c no">No</td><td class="c part">Known crawlers</td><td class="c part">Known + suspicious</td></tr>
+            <tr><td>Known AI crawler list</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+            <tr><td>Path-level rules</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c part">Page elements</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+            <tr><td>Merges with existing robots.txt</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+            <tr><td>AI-use policy documents</td><td class="c no">—</td><td class="c yes">✓</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+            <tr><td>Rate limiting</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+            <tr><td>Allow / block lists</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+            <tr><td>Behavioural detection</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c part">Where platform allows</td></tr>
+            <tr><td>Logs and event reports</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td><td class="c yes">Dashboard</td></tr>
+            <tr><td>Multiple sites, alerts</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+            <tr><td>Works on GitHub Pages alone</td><td class="c yes">Yes</td><td class="c yes">Yes</td><td class="c yes">Yes</td><td class="c no">No, needs CDN</td><td class="c no">No, needs CDN</td></tr>
+            <tr><td>External account needed</td><td class="c">None</td><td class="c">None</td><td class="c">None</td><td class="c">CDN account</td><td class="c">CDN + backend</td></tr>
+            <tr><td>Status today</td><td class="c"><span class="badge live">Working</span></td><td class="c"><span class="badge next">Next</span></td><td class="c"><span class="badge next">Next</span></td><td class="c"><span class="badge infra">Infra</span></td><td class="c"><span class="badge infra">Infra</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout warn" style="margin-top:24px"><strong>No protection is 100%.</strong> Even enforced rules rely on identifying crawlers by signals that can be spoofed. See the <a href="index.html#disclaimer">full disclaimer</a>.</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap cols">
+    <div><strong style="color:#fff">AI Barricade</strong><br>Early version: only Level 1 is functional; payments are not connected.</div>
+    <div><a href="index.html">Home</a><br><a href="generator.html">Generator</a><br><a href="index.html#disclaimer">Disclaimer</a></div>
+  </div>
+</footer>
+</body>
+</html>
